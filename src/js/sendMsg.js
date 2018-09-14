@@ -29,6 +29,7 @@
     var btnMsg = msgForm.querySelector('.send-msg__btn');
     var bodyMsg = document.querySelector('.msg-block__wrap');
     var msgText = msgForm.querySelector('input[type=text]');
+    var indexMsg = 0;
     var sendMsg = function(){
         if(msgText.value){
             var newMsg = templateMsg.cloneNode(true);
@@ -39,6 +40,10 @@
             // newMsg.querySelector('.msg-block__time').textContent = timer();
             bodyMsg.appendChild(newMsg);
             msgText.value = "";
+            window.checkMsg(indexMsg++);
+            var heightChat = document.querySelector('.msg-block__wrap').clientHeight;
+            window.checkHeight(heightChat);
+
         }
     };
     btnMsg.addEventListener('click', sendMsg);

@@ -1,17 +1,20 @@
 @import 'colors.scss';
 
+$width-start : 425px;
 .mobile__content-chat{
   position: relative;
-  background: linear-gradient(45deg, rgba(0, 145, 229, 1) 0%, rgba(0, 145, 229, 1) 50%, rgba(0, 162, 255, 1) 50%, rgba(0, 162, 255, 1) 100%);
+  //background: linear-gradient(45deg, rgba(0, 145, 229, 1) 0%, rgba(0, 145, 229, 1) 50%, rgba(0, 162, 255, 1) 50%, rgba(0, 162, 255, 1) 100%);
 }
+
 .mobile__wrap-chat{
   min-height: 100vh;
-  width: 100%;
+  //width: 100%;
+  background: linear-gradient(45deg, rgba(0, 145, 229, 1) 0%, rgba(0, 145, 229, 1) 50%, rgba(0, 162, 255, 1) 50%, rgba(0, 162, 255, 1) 100%);
 }
 .chat__nav{
   display: flex;
   position: fixed;
-  width: 100%;
+  width: $width-start;
   background: $dark-color;
   flex-wrap: wrap;
   color: $light-text;
@@ -52,9 +55,9 @@
   display: flex;
   position: fixed;
   bottom: 0;
-  left: 0;
+  //left: 0;
   background: $dark-color;
-  width: 100%;
+  width: $width-start;
   padding: 20px 0;
 }
 
@@ -171,4 +174,10 @@
   background-size: contain;
   vertical-align: middle;
   margin-right: 10px;
+}
+
+@media screen and (max-width: 425px) {
+  .send-msg, .chat__nav{
+    width: 100%;
+  }
 }
