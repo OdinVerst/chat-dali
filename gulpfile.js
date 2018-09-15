@@ -67,10 +67,10 @@ gulp.task('sass', function () {
         .pipe(reload({stream: true}));
 });
 
-gulp.task('concat_js', function() {
-    return gulp.src(['./src/js/**/*.js'])
+gulp.task('concat_js:auth', function() {
+    return gulp.src(['./src/js/auth/*.js'])
         .pipe(sourcemaps.init())
-        .pipe(concat('all.js'))
+        .pipe(concat('auth_all.js'))
         .pipe(minify({
             ext:{
                 src:'',
@@ -79,6 +79,24 @@ gulp.task('concat_js', function() {
             noSource: false}))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./build/js'));
+});
+
+gulp.task('concat_js:chat', function() {
+    return gulp.src(['./src/js/chat/*.js'])
+        .pipe(sourcemaps.init())
+        .pipe(concat('chat_all.js'))
+        .pipe(minify({
+            ext:{
+                src:'',
+                min:'.min.js'
+            },
+            noSource: false}))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./build/js'));
+});
+gulp.task('js:build', function () {
+    return gulp.src('./src/js/*.js')
+        .pipe(gulp.dest('./build/js/'));
 });
 
 gulp.task('html:build', function () {
@@ -117,13 +135,15 @@ gulp.task('sprite:svg', function () {
 
 gulp.task('watch', function() {
     gulp.watch('./src/scss/**/*.scss', gulp.series('sass'));
-    gulp.watch('./src/js/**/*.js', gulp.series('concat_js'));
+    gulp.watch('./src/js/chat/*.js', gulp.series('concat_js:chat'));
+    gulp.watch('./src/js/auth/*.js', gulp.series('concat_js:auth'));
     gulp.watch('./src/img/sprite/png/*.*', gulp.series('sprite:png'));
     gulp.watch('./src/**/*.html', gulp.series('html:build'));
     gulp.watch('./src/img/sprite/svg/*.*', gulp.series('sprite:svg'));
     gulp.watch('./src/fonts/**/*.*', gulp.series('fonts:build'));
     gulp.watch('./src/json/**/*.json', gulp.series('json:build'));
     gulp.watch('./src/img/oth/*.json', gulp.series('img:build'));
+    gulp.watch('./src/js/*.js', gulp.series('js:build'));
 });
 
 
@@ -137,7 +157,9 @@ gulp.task('default', gulp.series(
     gulp.parallel(
         'sass',
         'html:build',
-        'concat_js',
+        'concat_js:auth',
+        'concat_js:chat',
+        'js:build',
         'sprite:png',
         'sprite:svg',
         'fonts:build',

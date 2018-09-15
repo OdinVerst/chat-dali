@@ -1,6 +1,27 @@
 'use strict';
 (function () {
     var urlMsg = 'http://localhost:3000/json/users.json';
+
+    // function timer(block, time) {
+    //
+    //     var seconds = 0;
+    //
+    //     var seconds_timer_id = setInterval(function() {
+    //         if (seconds < 600) {
+    //             seconds ++;
+    //             if(seconds> 60){
+    //                 block.textContent = Math.floor(seconds/60) + " minutes ago";
+    //             }else{
+    //                 block.textContent = seconds + " seconds ago";
+    //             }
+    //         } else {
+    //             block.textContent = time;
+    //             clearInterval(seconds_timer_id);
+    //         }
+    //     }, 1000);
+    //
+    // }
+
     var msgText = [];
     var templateMsgAnswer = document.querySelector('template').content.querySelector('.msg-block__answer');
     var bodyMsg = document.querySelector('.msg-block__wrap');
@@ -12,8 +33,14 @@
                 newMsgAnsw.querySelector('.msg-block__text').textContent = msgText.answer[msg];
                 var date = new Date();
                 var time = date.getHours() + ':' + date.getMinutes();
-                //timer(newMsgAnsw.querySelector('.msg-block__time'), time);
-                // newMsg.querySelector('.msg-block__time').textContent = timer();
+                window.timer(newMsgAnsw.querySelector('.msg-block__time'), time);
+                var tempAmswer = JSON.parse(localStorage.getItem('msg'));
+                console.log(tempAmswer);
+                tempAmswer.text.push(msgText.answer[msg]);
+                tempAmswer.date.push(time);
+                tempAmswer.answer.push(true);
+                localStorage.setItem('msg', JSON.stringify(tempAmswer));
+
                 setTimeout(
                     function () {
                         bodyMsg.appendChild(newMsgAnsw)

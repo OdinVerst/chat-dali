@@ -17,15 +17,7 @@
                 if(item === getData[0].value){
                     if(getData[1].value === passserv[i]){
                         window.location.href = 'http://localhost:3000/chat';
-                        var node = document.createElement('div');
-                        node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: green;';
-                        node.style.position = 'absolute';
-                        node.style.left = 0;
-                        node.style.right = 0;
-                        node.style.fontSize = '30px';
-
-                        node.textContent = 'Auth ok!';
-                        document.body.insertAdjacentElement('afterbegin', node);
+                        localStorage.setItem('auth', true);
                     }
                 }else {
                     var node2 = document.createElement('div');

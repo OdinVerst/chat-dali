@@ -41,14 +41,19 @@ $width-start : 425px;
 
 .dot-menu{
   display: none;
+  color: $dark-color;
   position: absolute;
-  width: 60px;
+  width: 100px;
   background: $light-text;
   right: 0;
   top: 33px;
   padding: 5px;
   list-style-type: none;
   text-align: center;
+}
+
+.active{
+  display: block;
 }
 
 .send-msg{

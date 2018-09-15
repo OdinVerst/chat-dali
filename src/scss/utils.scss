@@ -15,8 +15,11 @@ body {
 
 .mobile__wrap {
   width: 425px;
-  height: 740px;
   overflow: hidden;
+}
+
+.mobile__wrap-auth{
+  height: 740px;
 }
 
 .mobile__content {
